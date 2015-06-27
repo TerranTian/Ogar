@@ -6,12 +6,12 @@ function Chat(sender, message) {
 module.exports = Chat;
 
 Chat.prototype.build = function () {
-    var nick = this.sender.getName() + ':';
+    var nick = this.sender.getName();
     if (!nick) {
         if (this.sender.cells.length > 0) {
-            nick = 'An unnamed cell:'
+            nick = 'An unnamed cell'
         } else {
-            nick = 'Spectator:'
+            nick = 'Spectator'
         }
     }
     var buf = new ArrayBuffer(9+2*nick.length+2*this.message.length);

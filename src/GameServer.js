@@ -772,11 +772,6 @@ GameServer.prototype.getNearestVirus = function(cell) {
 };
 
 GameServer.prototype.updateCells = function() {
-    if (!this.run) {
-        // Dont run this function if the server is paused
-        return;
-    }
-
     // Loop through all player cells
     var massDecay = 1 - (this.config.playerMassDecayRate * this.gameMode.decayMod);
     for (var i = 0; i < this.nodesPlayer.length; i++) {
@@ -872,8 +867,11 @@ WebSocket.prototype.sendPacket = function(packet) {
             this.emit('close');
             this.removeAllListeners();
         }
-    } else {
+    } else if (!packet.build) {
+        // Do nothing
         //console.log("[Warning] There was an error sending the packet!");
+    } else {
+        //console.log("[Warning] There was an error sending the packet to "+this.playerTracker.name);
         // Remove socket
         this.emit('close');
         this.removeAllListeners();

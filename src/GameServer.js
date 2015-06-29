@@ -80,6 +80,7 @@ function GameServer() {
         tourneyAutoFill: 0, // If set to a value higher than 0, the tournament match will automatically fill up with bots after this amount of seconds
         tourneyAutoFillPlayers: 1, // The timer for filling the server with bots will not count down unless there is this amount of real players
     	chatMaxMessageLength: 200, // Maximum message length
+        chatDelay: 40, // The amount of ticks a user has to wait before making another chat message (1 tick = 50 ms)
     };
     // Parse config
     this.loadConfig();

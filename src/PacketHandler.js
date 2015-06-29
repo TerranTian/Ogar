@@ -90,6 +90,13 @@ PacketHandler.prototype.handleMessage = function(message) {
             this.socket.sendPacket(new Packet.SetBorder(c.borderLeft, c.borderRight, c.borderTop, c.borderBottom));
             break;
         case 99:
+            if (this.chatDelay > 0) {
+                // Discard packet
+                break;
+            } else {
+                this.chatDelay = this.gameServer.config.chatDelay;
+            }
+
             var message = "";
             var maxLen = this.gameServer.config.chatMaxMessageLength * 2; // 2 bytes per char
             var offset = 2;

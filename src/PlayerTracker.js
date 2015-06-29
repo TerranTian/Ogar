@@ -91,6 +91,11 @@ PlayerTracker.prototype.update = function() {
         this.gameServer.gameMode.pressQ(this.gameServer,this);
         this.socket.packetHandler.pressQ = false;
     }
+
+    // Chat delay (To prevent spam)
+    if (this.socket.packetHandler.chatDelay > 0) {
+        this.socket.packetHandler.chatDelay--;
+    }
     
     var updateNodes = []; // Nodes that need to be updated via packet
     
